@@ -1,10 +1,11 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse , HttpResponseRedirect
-from .forms import LoginForm , RegisterForm
+from .forms import LoginForm , RegisterForm  , QuestionForm , AnswerForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
 from django.shortcuts import render
+from .models import Question , Answer
 
 def index(request):
 	if request.user.is_authenticated:
@@ -45,12 +46,46 @@ def register(request):
 
 
 @login_required
-def dashboard(request):
+def dashboard(request ):
 	user = User.objects.get(username = request.user)
-
-	return render(request , "home/dashboard.html" , {'user':user})
+	questions = Question.objects.all().exclude(user = user)
+	question_id = set()
+	for question in questions:
+		question_id.add(question.id)
+	answers = Answer.objects.filter(question_id__in = question_id)
+	return render(request , "home/dashboard.html" , {'user':user , 'questions':questions ,'answers':answers})
 
 @login_required
 def logout_user(request):
 	logout(request)
 	return redirect('index')
+
+@login_required
+def ask(request):
+	if request.method == 'POST':
+		form = QuestionForm(request.POST , prefix = "form")
+		if form.is_valid():
+			user = User.objects.get(username = request.user)
+			question = Question(text = form.cleaned_data['text'] , user = user , interests = form.cleaned_data['interests'])
+			question.save()
+			return HttpResponseRedirect('/home/dashboard/')
+		
+	else:
+		form = QuestionForm(prefix = 'form')
+		return render(request , 'home/ask.html' , {'form':form})
+
+@login_required
+def answer(request , question_id):
+	question = Question.objects.get(id = question_id)
+	if request.method == "POST":
+		form = AnswerForm(request.POST , prefix = 'form')
+		if form.is_valid():
+			user = User.objects.get(username = request.user)
+			answer = Answer(user = user , text = form.cleaned_data['text']  , question = question)
+			answer.save()
+			return redirect("dashboard")
+
+	else:
+		form = AnswerForm(prefix = 'form')
+		return render(request , "home/answer.html" , {'form':form  , 'question':question})
+

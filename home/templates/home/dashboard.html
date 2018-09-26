@@ -16,5 +16,16 @@
 	Last Name  :{{user.last_name}}<br>
 
 	<a href = "/home/logout/"><button type = "button">Logout</button></a>
+	<a href = "/home/ask/"><button type = "button">Ask a Question</button></a>
+
+	<br><br>
+
+	{% for question in questions %}
+	{{question.text}}
+	<br>
+	<a href = "/home/{{question.id}}/answer/"><button type = "button">Answer </button></a>
+	<br>
+	{% endfor %}
+	{{answers}}
 </body>
 

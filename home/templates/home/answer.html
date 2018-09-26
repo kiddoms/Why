@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>
-		Register
+		Answer
 	</title>
 </head>
+
 <body style = "background-color: powderblue">
+	{{question.text}}
 
 	<form method = "POST">
 		{% csrf_token %}
+
 		{{form.as_p}}
-		<button type ="submit">Register</button>
+
+		<button type = "submit">Submit </button>
 	</form>
 </body>
+</html>

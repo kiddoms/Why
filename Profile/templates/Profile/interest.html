@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Add Interest
+	</title>
+</head>
+
+<body style = "background-color: green">
+	<a href = "/profile/"><button type = "button">Go Back</button></a>
+
+	<form method = "POST">
+		{% csrf_token %}
+		{{form.as_p}}
+
+		<button type = "submit">Submit</button>
+
+	</form>
+
+</body>
+</html>
