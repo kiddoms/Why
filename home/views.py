@@ -71,6 +71,27 @@ def dashboard(request ):
 				count += 1
 		question.downvote = count
 		question.save()
+	answer_id = set()
+	for answer in answers:
+		answer_id.add(answer.id)
+	ups = Vote_a.objects.filter(answer_id__in = answer_id).filter(upvote = True)
+	downs = Vote_a.objects.filter(answer_id__in = answer_id).filter(downvote = True)
+	for answer in answers:
+		count = 0
+		for up in ups:
+			if up.answer_id == answer.id:
+				count += 1
+		answer.upvote = count
+		answer.save()
+
+
+	for answer in answers:
+		count = 0
+		for down in downs:
+			if down.answer_id == answer.id:
+				count += 1
+		answer.downvote = count
+		answer.save()
 	return render(request , "home/dashboard.html" , {'user':user , 'questions':questions ,'answers':answers})
 
 @login_required
@@ -142,3 +163,38 @@ def question_downvote(request , question_id):
 	
 	down.save()
 	return HttpResponseRedirect("/home/dashboard/")
+
+
+@login_required
+def answer_upvote(request , answer_id):
+	answer = Answer.objects.get(id = answer_id)
+	user = User.objects.get(username = request.user)
+	try:
+		up = Vote_a.objects.get(answer  = answer , user = user)
+	except:
+		up = Vote_a(answer = answer , user = user )
+	if up.upvote :
+		up.upvote = False
+	else:
+		up.upvote = True
+		up.downvote = False
+	up.save()
+	return HttpResponseRedirect("/home/dashboard/")
+
+@login_required
+def answer_downvote(request , answer_id):
+	answer = Answer.objects.get(id = answer_id)
+	user = User.objects.get(username = request.user)
+	try:
+		down = Vote_a.objects.get(answer = answer , user = user)
+	except:
+		down = Vote_a(answer = answer , user = user )
+	if down.downvote:
+		down.downvote = False
+	else:
+		down.upvote = False	
+		down.downvote = True
+	
+	down.save()
+	return HttpResponseRedirect("/home/dashboard/")
+
