@@ -19,7 +19,10 @@ def add_interests(request):
 			print("hello")
 			user = User.objects.get(username = request.user)
 			interest = Interests(interest = form.cleaned_data['interest'] , user = user)
-			interest.save()
+			try:
+				interest.save()
+			except:
+				return HttpResponse("cannot select a topic twice")
 			return HttpResponseRedirect("/profile/interests/")
 		else:
 			return HttpResponse("Cannot select a topic twice")

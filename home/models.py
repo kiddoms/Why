@@ -20,6 +20,11 @@ class Answer(models.Model):
 	downvote = models.IntegerField(default = 0)
 	creation_date = models.DateTimeField(default = timezone.now())
 
+	def __str__(self):
+		return str(self.text)
+	class Meta:
+		unique_together = ('user' , 'question',)
+
 
 class Comment(models.Model):
 	answer = models.ForeignKey(Answer, on_delete = models.CASCADE)

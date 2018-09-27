@@ -82,10 +82,26 @@ def answer(request , question_id):
 		if form.is_valid():
 			user = User.objects.get(username = request.user)
 			answer = Answer(user = user , text = form.cleaned_data['text']  , question = question)
-			answer.save()
+			try:
+				answer.save()
+			except:
+				return HttpResponse("you cannot answer twice")
 			return redirect("dashboard")
 
 	else:
 		form = AnswerForm(prefix = 'form')
 		return render(request , "home/answer.html" , {'form':form  , 'question':question})
 
+@login_required
+def question_upvote(request , question_id):
+	question = Question.objects.get(id = question_id)
+	question.upvote +=1
+	question.save()
+	return HttpResponseRedirect("/home/dashboard/")
+
+@login_required
+def question_downvote(request , question_id):
+	question = Question.objects.get(id = question_id)
+	question.downvote +=1
+	question.save()
+	return HttpResponseRedirect("/home/dashboard/")

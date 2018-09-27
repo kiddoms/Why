@@ -8,7 +8,9 @@ class Interests(models.Model):
 		('topic1' , 'topic1'),
 		('topic2' , 'topic2'),
 		)
-	interest = models.CharField(choices = topic_choices , max_length = 10 , unique = True)
+	interest = models.CharField(choices = topic_choices , max_length = 10 )
+	class Meta:
+		unique_together = ('user' , 'interest',)
 
 
 class Save(models.Model):

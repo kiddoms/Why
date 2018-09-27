@@ -19,13 +19,28 @@
 	<a href = "/home/ask/"><button type = "button">Ask a Question</button></a>
 
 	<br><br>
-
 	{% for question in questions %}
+	<div>
+	<br>
 	{{question.text}}
 	<br>
-	<a href = "/home/{{question.id}}/answer/"><button type = "button">Answer </button></a>
+	<a href = "/home/{{question.id}}/upvote"><button type = "button">Upvote</button></a> : {{question.upvote}}
 	<br>
+		<a href = "/home/{{question.id}}/downvote"><button type = "button">Downvote</button></a> : {{question.downvote}}
+	<br>
+	<a href = "/home/{{question.id}}/answer"><button type = "button" >Answer</button></a>
+	<br>
+		<div>
+	{% for answer in answers %}
+		{% if answer.question_id == question.id %}
+
+		{{answer.text}}
+		<br>
+		{% endif %}
+	</div>
 	{% endfor %}
-	{{answers}}
+</div>
+	{% endfor %}
+	
 </body>
 
