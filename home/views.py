@@ -5,7 +5,7 @@ from .forms import LoginForm , RegisterForm  , QuestionForm , AnswerForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
 from django.shortcuts import render
-from .models import Question , Answer
+from .models import Question , Answer , Vote_q , Vote_a
 
 def index(request):
 	if request.user.is_authenticated:
@@ -53,6 +53,24 @@ def dashboard(request ):
 	for question in questions:
 		question_id.add(question.id)
 	answers = Answer.objects.filter(question_id__in = question_id)
+	ups = Vote_q.objects.filter(question_id__in = question_id).filter(upvote = True)
+	downs = Vote_q.objects.filter(question_id__in = question_id).filter(downvote = True)
+	for question in questions:
+		count = 0
+		for up in ups:
+			if up.question_id == question.id:
+				count += 1
+		question.upvote = count
+		question.save()
+
+
+	for question in questions:
+		count = 0
+		for down in downs:
+			if down.question_id == question.id:
+				count += 1
+		question.downvote = count
+		question.save()
 	return render(request , "home/dashboard.html" , {'user':user , 'questions':questions ,'answers':answers})
 
 @login_required
@@ -95,13 +113,32 @@ def answer(request , question_id):
 @login_required
 def question_upvote(request , question_id):
 	question = Question.objects.get(id = question_id)
-	question.upvote +=1
-	question.save()
+	user = User.objects.get(username = request.user)
+	try:
+		up = Vote_q.objects.get(question = question , user = user)
+	except:
+		up = Vote_q(question = question , user = user )
+	if up.upvote :
+		up.upvote = False
+	else:
+		up.upvote = True
+		up.downvote = False
+	up.save()
 	return HttpResponseRedirect("/home/dashboard/")
 
 @login_required
 def question_downvote(request , question_id):
 	question = Question.objects.get(id = question_id)
-	question.downvote +=1
-	question.save()
+	user = User.objects.get(username = request.user)
+	try:
+		down = Vote_q.objects.get(question = question , user = user)
+	except:
+		down = Vote_q(question = question , user = user )
+	if down.downvote:
+		down.downvote = False
+	else:
+		down.upvote = False	
+		down.downvote = True
+	
+	down.save()
 	return HttpResponseRedirect("/home/dashboard/")

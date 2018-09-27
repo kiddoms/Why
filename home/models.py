@@ -10,6 +10,16 @@ class Question(models.Model):
 	interests = models.CharField(max_length = 10000 , default = '')
 	creation_date = models.DateTimeField(default = timezone.now())
 
+
+class Vote_q(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	question = models.ForeignKey(Question , on_delete = models.CASCADE)
+	upvote = models.BooleanField(default = False)
+	downvote = models.BooleanField(default = False)
+
+
+	
+
 class Answer(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	question = models.ForeignKey(Question , on_delete = models.CASCADE)
@@ -24,6 +34,12 @@ class Answer(models.Model):
 		return str(self.text)
 	class Meta:
 		unique_together = ('user' , 'question',)
+
+class Vote_a(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	answer = models.ForeignKey(Answer , on_delete = models.CASCADE)
+	upvote = models.BooleanField(default = False)
+	downvote = models.BooleanField(default = False)
 
 
 class Comment(models.Model):
