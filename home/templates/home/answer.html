@@ -22,8 +22,6 @@
 </html>-->
 
 
-
-
 	<!-- HEADER -->
 	{% include "home/header.html" %}
 
@@ -61,7 +59,7 @@
 
 	<div class="post-articles question-articles">
 		
-	<article class="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language" itemscope="" itemtype="https://schema.org/Question">
+	<article class="article-question article-post">
 		<div class="single-inner-content"><div class="question-inner">
 			<div class="question-image-vote"><div class="author-image">
 				<a href="#"><span class="author-image-span"><img class="avatar avatar-42 photo" alt="{{question.user.username}}" title="{{question.user.username}}" src="/static/home/dp-42_42.jpg" width="42" height="42"></span></a>
@@ -73,7 +71,7 @@
 					<div class="question-header">
 						<a class="post-author" href="#">{{question.user.username}}</a>
 						<div class="post-meta">
-							<span class="post-date" itemprop="dateCreated" datetime="April 19, 2018">Asked: <time class="entry-date published" datetime="2018-04-19T02:00:31+00:00">April 19, 2018</time></span>
+							<span class="post-date" datetime="April 19, 2018">Asked: <time class="entry-date published" datetime="2018-04-19T02:00:31+00:00">April 19, 2018</time></span>
 						</div>
 					</div>
 				</header>
@@ -174,7 +172,7 @@
 				<a href="#"> Added an answer on April 19, 2018 at 2:01 am </a> 
 				</div> </div> 
 
-				<div class="text"> <div itemprop="text">
+				<div class="text"> <div>
 					<p>{{answer.text}}</p>
 				</div> 
 
@@ -204,14 +202,10 @@
 <div class="clearfix"></div></div></div>
 
 <div id="respond" class="comment-respond">
-	<h3 class="section-title">Leave an answer
-		<div class="cancel-comment-reply">
-			<a rel="nofollow" id="cancel-comment-reply-link" href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/#respond" style="display:none;">Cancel reply</a>
-		</div>
-	</h3>
+	<h3 class="section-title">Leave an answer</h3>
 
-	<form action="https://2code.info/demo/themes/Discy/Main/wp-comments-post.php" method="post" id="commentform" class="post-section comment-form answers-form" novalidate="" enctype="multipart/form-data">
-		<p class="comment-login">Logged in as<a class="comment-login-login" href="https://2code.info/demo/themes/Discy/Main/profile/adarsh/"><i class="icon-user"></i>adarsh</a><a class="comment-login-logout" href="/home/logout" title="Logout of this account"><i class="icon-logout"></i>Logout</a></p>
+	<form action="#" method="post" id="commentform" class="post-section comment-form answers-form" novalidate="" enctype="multipart/form-data">
+		<p class="comment-login">Logged in as<a class="comment-login-login" href="#">{{request.user}}</a><a class="comment-login-logout" href="/home/logout" title="Logout of this account">Logout</a></p>
 
 		<div class="wpqa_form"> 
 			<div class="fileinputs"> 
@@ -224,8 +218,6 @@
 			</div> 
 		</div>
 
-		<div class="wpqa_error"></div>
-
 		<div class="form-input form-textarea form-comment-normal">
 			<textarea id="comment" name="comment" aria-required="true" placeholder="Answer"></textarea>
 			<i class="icon-pencil"></i>
@@ -235,10 +227,6 @@
 			<input type="hidden" name="comment_post_ID" value="118" id="comment_post_ID">
 			<input type="hidden" name="comment_parent" id="comment_parent" value="0">
 		</p>
-
-		<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="cfcfc80913"></p>
-
-		<p style="display: none;"></p><input type="hidden" id="ak_js" name="ak_js" value="1538053414857">
 	</form>
 </div>
 

@@ -9,8 +9,6 @@
 	<div class="panel-pop" id="lost-password"><i class="icon-cancel"></i><div class="pop-header"><h3>Forget Password</h3></div><div class="pop-border-radius"><div class="panel-pop-content"><p>Lost your password? Please enter your email address. You will receive a link and will create a new password via email.</p><form method="post" class="wpqa-lost-password wpqa_form"><div class="wpqa_error"></div><div class="wpqa_success"></div><div class="form-inputs clearfix"><p><label for="user_mail_869">E-Mail<span class="required">*</span></label><input class="required-item" name="user_mail" id="user_mail_869" type="email"><i class="icon-mail"></i></p></div><p class="form-submit"><span class="load_span"><span class="loader_2"></span></span><input value="Reset" class="button-default " type="submit"><input name="form_type" value="wpqa-forget" type="hidden"><input name="ajax_url" value="https://2code.info/demo/themes/Discy/Main/wp-admin/admin-ajax.php" type="hidden"><input name="redirect_to" value="https://2code.info/demo/themes/Discy/Main/" type="hidden"><input name="pass_nonce" value="f12a5dca66" type="hidden"></p></form></div></div><div class="pop-footer">Have an account? <a href="#" class="login-panel">Sign In Now</a></div></div>
 
 	<div class="panel-pop" id="wpqa-question" data-width="690"><i class="icon-cancel"></i><div class="panel-pop-content"><div class="alert-message error"><i class="icon-cancel"></i>You must login to ask question.<p></p></div><form class="wpqa_form login-form wpqa_login" action="https://2code.info/demo/themes/Discy/Main/" method="post"><div class="wpqa_error"></div><div class="form-inputs clearfix"><p class="login-text"><label for="username_933">Username<span class="required">*</span></label><input id="username_933" class="required-item" name="log" type="text"><i class="icon-user"></i></p><p class="login-password"><label for="password_933">Password<span class="required">*</span></label><input id="password_933" class="required-item" name="pwd" type="password"><i class="icon-lock-open"></i></p></div><div class="rememberme normal_label"><label><span class="wpqa_checkbox"><input name="rememberme" checked="checked" type="checkbox"></span> <span class="wpqa_checkbox_span">Remember Me!</span></label></div><a href="#" class="lost-password">Forget Password?</a><p class="form-submit login-submit"><span class="load_span"><span class="loader_2"></span></span><input value="Login" class="button-default login-submit" type="submit"></p><input name="redirect_to" value="https://2code.info/demo/themes/Discy/Main/" type="hidden"><input name="wpqa_login_nonce" value="64bba5d3a3" type="hidden"><input name="ajax_url" value="https://2code.info/demo/themes/Discy/Main/wp-admin/admin-ajax.php" type="hidden"><input name="form_type" value="wpqa-login" type="hidden"></form></div><div class="pop-footer">Need An Account, <a href="#" class="signup-panel">Sign Up Here</a></div></div>
-
-	<div class="panel-pop" id="wpqa-report"><i class="icon-cancel"></i><div class="panel-pop-content"><p>Please briefly explain why you feel this answer should be reported.</p><form class="wpqa_form submit-report" method="post"><div class="wpqa_error"></div><div class="wpqa_success"></div><div class="form-inputs clearfix"><p class="login-text"><label for="explain-reported">Explain<span class="required">*</span></label><textarea id="explain-reported" name="explain"></textarea><i class="icon-pencil"></i></p></div><p class="form-submit"><span class="load_span"><span class="loader_2"></span></span><input value="Report" class="button-default" type="submit"></p><input name="form_type" value="wpqa-report" type="hidden"><input name="post_id" value="64" type="hidden"></form></div></div>
 	-->
 
 	<!-- HEADER -->
@@ -25,33 +23,20 @@
 
 	<div class="clearfix"></div>
 
-	<div class="row">
-		<div class="col col12">
-			<div class="wrap-tabs">
-				<div class="menu-tabs active-menu">
-					<ul class="menu flex">
-						<li class="active-tab"><a href="https://2code.info/demo/themes/Discy/Main/?show=recent-questions">Recent Questions</a></li>
-						<li><a href="https://2code.info/demo/themes/Discy/Main/?show=most-answers">Most Answers</a></li>
-						<li><a href="https://2code.info/demo/themes/Discy/Main/?show=question-bump">Question Bump</a></li>
-						<li><a href="https://2code.info/demo/themes/Discy/Main/?show=answers">Answers</a></li>
-						<li><a href="https://2code.info/demo/themes/Discy/Main/?show=most-visit">Most Visit</a></li>
-						<li class="flexMenu-viewMore"><a href="#" title=""><i class="icon-dot-3"></i></a>
-
-							<ul class="flexMenu-popup" style="display:none; position: absolute;">
-								<li><a href="https://2code.info/demo/themes/Discy/Main/?show=most-vote">Most Voted</a></li>
-								<li><a href="https://2code.info/demo/themes/Discy/Main/?show=no-answers">No Answers</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
+	<div class="row"><div class="col col12"><div class="wrap-tabs">
+		<div class="menu-tabs active-menu">
+			<ul class="menu flex">
+				<li class="active-tab"><a href="#">Recent Questions</a></li>
+				<li><a href="#">Most Answers</a></li>
+				<li><a href="#">Most Visit</a></li>
+			</ul>
 		</div>
-	</div>
+	</div></div></div>
 
 
 	{% for question in questions %}
 
-	<article class="article-question article-post clearfix question-vote-image question-type-normal question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
+	<article class="article-question article-post">
 		<div class="single-inner-content"><div class="question-inner">
 			<div class="question-image-vote"><div class="author-image">
 				<a href="#"><span class="author-image-span"><img class="avatar avatar-42 photo" alt="{{question.user.username}}" title="{{question.user.username}}" src="/static/home/dp-42_42.jpg" width="42" height="42"></span></a>

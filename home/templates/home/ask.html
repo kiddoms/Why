@@ -3,46 +3,6 @@
 {% load crispy_forms_tags %}
 
 
-
-
-<!DOCTYPE html>
-<html class=" no-svg js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en-US">
-
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="profile" href="https://gmpg.org/xfn/11">
-
-<title>Ask a Question</title>
-
-<script src="/static/home/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
-<link rel="stylesheet" id="contact-form-7-group-css" href="/static/home/a.css" type="text/css" media="all">
-<script type="text/javascript" src="/static/home/jquery.js"></script>
-<script type="text/javascript" src="/static/home/jquery-migrate.js"></script>
-<style>.theiaStickySidebar:after {content: ""; display: table; clear: both;}</style>
-<style>.theiaStickySidebar:after {content: ""; display: table; clear: both;}</style>
-<script src="/static/home/prompt.js"></script>
-<link rel="stylesheet" type="text/css" id="u0" href="/static/home/skin.css">
-</head>
-
-
-<body class="question-template-default single single-question postid-118 logged-in page-with-breadcrumbs single_page single_page_no discy_for_all active-lightbox">
-
-<style>
-#id_form-text{
-	width: 80%;
-}
-
-#id_form-explanation{
-	width: 80%;
-}
-
-
-</style>
-
-	<div class="background-cover"></div>
-
-	<div id="wrap" class="wrap-login"><div class="hidden-header header-dark mobile_bar_active">
-
-
 	<!-- HEADER -->
 	{% include "home/header.html" %}
 
@@ -54,15 +14,22 @@
 
 	<div class="discy-main-inner float_l">
 
-		<div class="breadcrumbs"><span class="crumbs" xmlns:v="https://rdf.data-vocabulary.org/#"><span typeof="v:Breadcrumb"> <a rel="v:url" property="v:title" href="https://2code.info/demo/themes/Discy/Main/"><i class="icon-home"></i>Home</a><span rel="v:child" typeof="v:Breadcrumb"><span class="crumbs-span"> / </span><span class="current">Add question</span></span></span></span><div class="breadcrumb-right"></div></div>
+		<div class="breadcrumbs">
+			<span class="crumbs">
+				<span> <a href="/home/">Home</a>
+					<span><span class="crumbs-span"> / </span>
+					<span class="current">Add question</span>
+					</span>
+				</span>
+			</span>
 
-		
-      
-          <h1 class="mt-2">Ask a Question</h1>
-          <hr class="mt-0 mb-4">
+			<div class="breadcrumb-right"></div>
+		</div>
+
+    <h1 class="mt-2">Ask a Question</h1>
+    <hr class="mt-0 mb-4">
+	
 	<form method = 'post'>
-		
-
 		{% csrf_token %}
 		<label for = "{{form.text.id_for_label}}" >Text:</label><br>
 		{{form.text}}
@@ -74,13 +41,9 @@
 		{{form.interests|as_crispy_field}}
 		<br>
 		<button type ="submit" class="btn btn-primary btn-lg" >Submit</button>
-
 	</form>
 
-	
     </div>
-
-	
 
 	<!-- RIGHT SIDE BAR -->
 <div class="hide-main-inner"></div>
