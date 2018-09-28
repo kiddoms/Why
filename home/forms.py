@@ -16,6 +16,7 @@ class RegisterForm(ModelForm):
 
 class QuestionForm(forms.Form):
 	text = forms.CharField(max_length = 140)
+	explaination = forms.CharField(max_length = 300)
 	topic_choices = (
 		('topic1' , 'topic1'),
 		('topic2' , 'topic2'),

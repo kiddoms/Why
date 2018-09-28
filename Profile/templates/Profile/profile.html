@@ -10,6 +10,57 @@
 	<a href = "/home/dashboard/"><button type = "button">Home</button></a>
 
 	<a href="/profile/interests/"><button type ="button">Add your interests</button></a>
+	<br>
+	<br>
+	<br>
+	<h3> SAVED QUESTIONS </h3>
+	{% for q in save_q %}
+	{{q.text}}
+	<br>
+	{{q.explaination}}
+	<br>
+	{% for a in save_a %}
+	{% if a.question_id == q.id %}
+	{{a.text}}
+	<br>
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
+
+	<br>
+	<br>
+	<br>
+	<h3> ASKED QUESTIONS </h3>
+	{% for q in ask_q %}
+	{{q.text}}
+	<br>
+	{{q.explaination}}
+	<br>
+	{% for a in ask_a %}
+	{% if a.question_id == q.id %}
+	{{a.text}}
+	<br>
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
+
+
+	<br>
+	<br>
+	<br>
+	<h3> ANSWERED QUESTIONS </h3>
+	{% for q in answer_q %}
+	{{q.text}}
+	<br>
+	{{q.explaination}}
+	<br>
+	{% for a in answer_a %}
+	{% if a.question_id == q.id %}
+	{{a.text}}
+	<br>
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
 
 </body>
 </html>

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
 from django.shortcuts import render
 from .models import Question , Answer , Vote_q , Vote_a
+from Profile.models import Save
 
 def index(request):
 	if request.user.is_authenticated:
@@ -52,6 +53,7 @@ def dashboard(request ):
 	question_id = set()
 	for question in questions:
 		question_id.add(question.id)
+		print(question.interests)
 	answers = Answer.objects.filter(question_id__in = question_id)
 	ups = Vote_q.objects.filter(question_id__in = question_id).filter(upvote = True)
 	downs = Vote_q.objects.filter(question_id__in = question_id).filter(downvote = True)
@@ -105,7 +107,7 @@ def ask(request):
 		form = QuestionForm(request.POST , prefix = "form")
 		if form.is_valid():
 			user = User.objects.get(username = request.user)
-			question = Question(text = form.cleaned_data['text'] , user = user , interests = form.cleaned_data['interests'])
+			question = Question(text = form.cleaned_data['text'] , explaination = form.cleaned_data['explaination'] , user = user , interests = form.cleaned_data['interests'])
 			question.save()
 			return HttpResponseRedirect('/home/dashboard/')
 		
@@ -198,3 +200,21 @@ def answer_downvote(request , answer_id):
 	down.save()
 	return HttpResponseRedirect("/home/dashboard/")
 
+@login_required
+def save(request , question_id):
+	question = Question.objects.get(id = question_id)
+	user = User.objects.get(username = request.user)
+	c =0 
+	try:
+		save = Save.objects.get(question = question , user = user)
+		c=1
+	except:
+		save = Save(question = question , user = user)
+		c=2
+	print(c)
+	if c == 1:
+		save.delete()
+	elif c==2:
+		save.save()
+
+	return HttpResponseRedirect("/home/dashboard/")

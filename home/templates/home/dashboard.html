@@ -24,6 +24,10 @@
 	<br>
 	{{question.text}}
 	<br>
+	{{question.explaination}}
+	<br>
+	<a href = "/home/question/{{question.id}}/save/"><button type = "button">Save</button></a>
+	<br>
 	<a href = "/home/question/{{question.id}}/upvote/"><button type = "button">Upvote</button></a> : {{question.upvote}}
 	<br>
 		<a href = "/home/question/{{question.id}}/downvote/"><button type = "button">Downvote</button></a>  : {{question.downvote}}
@@ -38,7 +42,7 @@
 		{{answer.text}}
 				<a href = "/home/answer/{{answer.id}}/upvote/"><button type = "button">Upvote</button></a>  : {{answer.upvote}}
 
-				<a href = "/home/answer/{{answer.id}}/downvote/"><button type = "button">Dwonvote</button></a>  : {{answer.downvote}}
+				<a href = "/home/answer/{{answer.id}}/downvote/"><button type = "button">Downvote</button></a>  : {{answer.downvote}}
 
 		<br>
 		{% endif %}

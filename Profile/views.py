@@ -2,13 +2,39 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect , HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import InterestForm
-from .models import Interests
+from .models import Interests , Save
 from django.contrib.auth.models import User
+from home.models import Question , Answer
 # Create your views here.
 
 @login_required
 def index(request):
-	return render(request , 'Profile/profile.html',{})
+	user = User.objects.get(username = request.user)
+	saves = Save.objects.filter(user = user)
+	question_id = set()
+	for save in saves:
+		question_id.add(save.question_id)
+	save_questions = Question.objects.filter(id__in = question_id)
+	save_answers = Answer.objects.filter(question_id__in = question_id)
+
+
+	ask_questions = Question.objects.filter(user = user)
+	question_id2 = set()
+	for q in ask_questions:
+		question_id2.add(q.id)
+	ask_answers = Answer.objects.filter(question_id__in = question_id2)
+
+	answers = Answer.objects.filter(user = user)
+	question_id1 = set()
+	for answer in answers:
+		question_id1.add(answer.question_id)
+	answer_questions = Question.objects.filter(id__in = question_id1)
+	
+
+	return render(request , 'Profile/profile.html',{'save_q':save_questions ,
+							'ask_q':ask_questions , 'answer_q':answer_questions ,
+							'answer_a':answers , 'save_a':save_answers,
+							'ask_a':ask_answers})
 
 @login_required
 def add_interests(request):
@@ -30,3 +56,5 @@ def add_interests(request):
 	else:
 		form = InterestForm(prefix = "form")
 		return render(request , "Profile/interest.html" , {'form':form})
+
+

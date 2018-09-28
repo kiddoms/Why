@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 # Create your models here.
 class Question(models.Model):
+	explaination = models.CharField(max_length = 300 , default = '')
 	text = models.CharField(max_length = 140)
 	upvote = models.IntegerField(default = 0)
 	downvote = models.IntegerField(default = 0)
@@ -17,8 +18,6 @@ class Vote_q(models.Model):
 	upvote = models.BooleanField(default = False)
 	downvote = models.BooleanField(default = False)
 
-
-	
 
 class Answer(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
