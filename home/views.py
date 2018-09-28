@@ -59,7 +59,8 @@ def dashboard(request ):
 	question_id = set()
 	questions = Question.objects.all().exclude(user = user).order_by('-creation_date')
 	for question in questions:
-		x = list(re.sub("[\[\]',]","",question.interests).split(" "))
+		x = list(question.interests.split(" "))
+		print(x)
 		l2 = set(x)
 		if l1.intersection(l2):
 			question_id.add(question.id)
@@ -122,7 +123,12 @@ def ask(request):
 		form = QuestionForm(request.POST , prefix = "form")
 		if form.is_valid():
 			user = User.objects.get(username = request.user)
-			question = Question(text = form.cleaned_data['text'] , explaination = form.cleaned_data['explaination'] , user = user , interests = form.cleaned_data['interests'])
+			print(type(form.cleaned_data['interests']))
+
+			x = re.sub("[\[\]',]","",str(form.cleaned_data['interests']))
+			question = Question(text = form.cleaned_data['text'] , explaination = form.cleaned_data['explanation'] 
+								, user = user , interests = x)
+			print(question.interests)
 			question.save()
 			return HttpResponseRedirect('/home/dashboard/')
 		
