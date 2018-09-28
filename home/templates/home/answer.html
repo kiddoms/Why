@@ -94,7 +94,7 @@
 			<div class="question-content question-content-first">
 				<header class="article-header">
 					<div class="question-header">
-						<a class="post-author" href="https://2code.info/demo/themes/Discy/Main/profile/martin/">Martin Hope</a>
+						<a class="post-author" href="https://2code.info/demo/themes/Discy/Main/profile/martin/">{{question.user.username}}</a>
 						<div class="post-meta">
 							<span class="post-date" itemprop="dateCreated" datetime="April 19, 2018">Asked: <time class="entry-date published" datetime="2018-04-19T02:00:31+00:00">April 19, 2018</time></span>
 						</div>
@@ -134,7 +134,7 @@
 				
 				<footer class="question-footer">
 					<ul class="footer-meta">
-						<li><i class="icon-comment"></i><a href="/home/{{question.id}}/answer/">5</a> <span class="question-span"><a href="/home/{{question.id}}/answer/">Answers</a></span></li>
+						<li><i class="icon-comment"></i><a href="/home/{{question.id}}/answer/">{{question.answer_count}}</a> <span class="question-span"><a href="/home/{{question.id}}/answer/">Answers</a></span></li>
 						<li class="question-followers"><i class="icon-users"></i><span>5</span> Followers</li>
 						<li class="question-follow"><div class="small_loader loader_2"></div><a href="#" title="Follow the question"><i class="icon-plus"></i></a></li>
 					</ul>
@@ -169,7 +169,19 @@
 
 <!-- VOTED, OLDEST, RECENT TAB -->
 
-<div class="question-adv-comments"><div id="comments" class="post-section"><div class="post-inner"><div class="answers-tabs"><h3 class="section-title"><span>4 </span>Answers</h3><div class="answers-tabs-inner"><ul><li class="active-tab"><a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/?show=votes#comments">Voted</a></li><li><a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/?show=oldest#comments">Oldest</a></li><li><a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/?show=recent#comments">Recent</a></li></ul></div><div class="clearfix"></div></div>
+<div class="question-adv-comments">
+	<div id="comments" class="post-section">
+		<div class="post-inner"><div class="answers-tabs">
+			<h3 class="section-title"><span>{{question.answer_count}} </span>Answers</h3>
+			<div class="answers-tabs-inner">
+				<ul>
+					<li class="active-tab"><a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/?show=votes#comments">Voted</a></li>
+					<li><a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/?show=oldest#comments">Oldest</a></li>
+					<li><a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/?show=recent#comments">Recent</a></li>
+				</ul>
+			</div>
+
+			<div class="clearfix"></div></div>
 
 
 
@@ -184,37 +196,13 @@
 		<div id="comment-63" class="comment-body clearfix"> 
 			<div class="author-image">
 				<a href="https://2code.info/demo/themes/Discy/Main/profile/james/"><span class="author-image-span"><img class="avatar avatar-42 photo" alt="James Wane" title="James Wane" src="/static/home/team-6-42x42.jpg" width="42" height="42"></span></a>
-
-				<div class="author-image-pop-2"><div class="post-section user-area"><div class="post-inner">
-					<div class="author-image"><a href="https://2code.info/demo/themes/Discy/Main/profile/james/">
-						<span class="author-image-span"><img class="avatar avatar-70 photo" alt="James Wane" title="James Wane" src="/static/home/team-6-70x70.jpg" width="70" height="70">
-						</span>
-					</a></div>
-
-					<div class="user-content"><div class="user-inner"><div class="user-data-columns">
-						<h4><a href="https://2code.info/demo/themes/Discy/Main/profile/james/">James Wane</a></h4>
-						<div class="user-data">
-							<ul>
-								<li class="city-country"><i class="icon-location"></i>Tanta, Egypt</li>
-							</ul>
-						</div>
-					</div>
-					</div></div>
-
-					<div class="user-columns-data"><ul><li class="user-columns-questions"><a href="https://2code.info/demo/themes/Discy/Main/profile/james/questions/"><i class="icon-book-open"></i>3 Questions</a></li><li class="user-columns-answers"><a href="https://2code.info/demo/themes/Discy/Main/profile/james/answers/"><i class="icon-comment"></i>9 Answers</a></li><li class="user-columns-best-answers"><a href="https://2code.info/demo/themes/Discy/Main/profile/james/best-answers/"><i class="icon-graduation-cap"></i>0 Best Answers</a></li><li class="user-columns-points"><a href="https://2code.info/demo/themes/Discy/Main/profile/james/points/"><i class="icon-bucket"></i>99 Points</a></li></ul></div>
-
-					<div class="user-follow-profile"><div class="user_follow_2"><div class="small_loader loader_2 user_follow_loader"></div><a href="#" class="following_you tooltip-n" data-rel="4" original-title="Follow"><span class="follow-value">Follow</span><span class="follow-count">1</span></a></div><a href="https://2code.info/demo/themes/Discy/Main/profile/james/">View Profile</a></div>
-
-					<div class="clearfix"></div>
-
-				</div></div></div>
 			</div> 
 
 			<div class="comment-text"> 
 				<div class="author clearfix"> <div class="comment-meta"> <div class="comment-author"> 
-					<a href="https://2code.info/demo/themes/Discy/Main/profile/james/"> James Wane </a> 
+					<a href="https://2code.info/demo/themes/Discy/Main/profile/james/"> {{answer.user.username}} </a> 
 				</div> 
-				<a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/#comment-63" class="comment-date" itemprop="dateCreated" datetime="April 19, 2018"> Added an answer on April 19, 2018 at 2:01 am </a> 
+				<a href="#"> Added an answer on April 19, 2018 at 2:01 am </a> 
 				</div> </div> 
 
 				<div class="text"> <div itemprop="text">
