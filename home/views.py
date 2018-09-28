@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
 from django.shortcuts import render
 from .models import Question , Answer , Vote_q , Vote_a
-from Profile.models import Save
+from Profile.models import Save , Interests
+import re
 
 def index(request):
 	if request.user.is_authenticated:
@@ -49,11 +50,24 @@ def register(request):
 @login_required
 def dashboard(request ):
 	user = User.objects.get(username = request.user)
-	questions = Question.objects.all().exclude(user = user)
+	interests  = Interests.objects.filter(user = user )
+	list1 = []
+	for interest in interests:
+		list1.append(interest.interest)
+		#print(list1 , l1)
+	l1 = set(list1)
 	question_id = set()
+	questions = Question.objects.all().exclude(user = user).order_by('-creation_date')
 	for question in questions:
-		question_id.add(question.id)
-		print(question.interests)
+		x = list(re.sub("[\[\]',]","",question.interests).split(" "))
+		l2 = set(x)
+		if l1.intersection(l2):
+			question_id.add(question.id)
+	if question_id:
+		questions = Question.objects.filter(id__in = question_id).order_by('-creation_date')
+	else:
+		for question in questions:
+			 question_id.add(question.id)
 	answers = Answer.objects.filter(question_id__in = question_id)
 	ups = Vote_q.objects.filter(question_id__in = question_id).filter(upvote = True)
 	downs = Vote_q.objects.filter(question_id__in = question_id).filter(downvote = True)
@@ -95,6 +109,7 @@ def dashboard(request ):
 		answer.downvote = count
 		answer.save()
 	return render(request , "home/dashboard.html" , {'user':user , 'questions':questions ,'answers':answers})
+
 
 @login_required
 def logout_user(request):
