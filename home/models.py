@@ -15,6 +15,7 @@ class Question(models.Model):
 		)
 	interests = models.CharField(max_length = 10 , default = '',choices = topic_choices)
 	creation_date = models.DateTimeField(default = timezone.now())
+	answer_count = models.IntegerField(default = 0)
 
 	def __str__(self):
 		return str(self.text)

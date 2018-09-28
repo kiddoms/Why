@@ -142,6 +142,8 @@ def answer(request , question_id):
 				answer.save()
 			except:
 				return HttpResponse("you cannot answer twice")
+			question.answer_count += 1
+			question.save()
 			return redirect("dashboard")
 
 	else:
