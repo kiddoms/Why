@@ -1,19 +1,9 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		Ask a Question
-	</title>
-</head>
-<body style = "background-color: powderblue">
-	<form method = 'post'>
-		{% csrf_token %}
-		{{form}}
-		<button type ="submit">Register</button>
-	</form>
 
-</body>
-</html>-->
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
 
 <!DOCTYPE html>
 <html class=" no-svg js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en-US">
@@ -36,6 +26,18 @@
 
 <body class="question-template-default single single-question postid-118 logged-in page-with-breadcrumbs single_page single_page_no discy_for_all active-lightbox">
 
+<style>
+#id_form-text{
+	width: 80%;
+}
+
+#id_form-explanation{
+	width: 80%;
+}
+
+
+</style>
+
 	<div class="background-cover"></div>
 
 	<div id="wrap" class="wrap-login"><div class="hidden-header header-dark mobile_bar_active">
@@ -48,122 +50,37 @@
 	</div>
 
 	<div class="discy-content"><div class="discy-inner-content menu_sidebar"><div class="discy-container">
-		<main class="discy-main-wrap discy-site-content float_l" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;"><div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static;">
+		<main class="discy-main-wrap discy-site-content float_l" ><div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static;">
 
 	<div class="discy-main-inner float_l">
 
 		<div class="breadcrumbs"><span class="crumbs" xmlns:v="https://rdf.data-vocabulary.org/#"><span typeof="v:Breadcrumb"> <a rel="v:url" property="v:title" href="https://2code.info/demo/themes/Discy/Main/"><i class="icon-home"></i>Home</a><span rel="v:child" typeof="v:Breadcrumb"><span class="crumbs-span"> / </span><span class="current">Add question</span></span></span></span><div class="breadcrumb-right"></div></div>
 
-		<div class="clearfix"></div>
+		
+      
+          <h1 class="mt-2">Ask a Question</h1>
+          <hr class="mt-0 mb-4">
+	<form method = 'post'>
+		
 
-		<div class="wpqa-add-question-template">
-			<form class="form-post wpqa_form" method="post" enctype="multipart/form-data">
-				<div class="form-inputs clearfix">
-					<p>
-						<label for="question-title-398">Question Title<span class="required">*</span></label>
-						<input name="title" id="question-title-398" class="the-title" type="text"><i class="icon-chat"></i>
-						<span class="form-description">Please choose an appropriate title for the question to answer it even easier.</span>
-					</p>
-					
-					<p>
-						<label for="question-category-398">Category<span class="required">*</span></label>
-						<span class="styled-select">
-							<select name="category" id="question-category-398" class="postform">
-								<option value="-1" selected="selected">Select a Category</option>
-								<option class="level-0" value="8">Analytics</option>
-								<option class="level-0" value="9">Communication</option>
-								<option class="level-0" value="7">Company</option>
-								<option class="level-0" value="6">Language</option>
-								<option class="level-0" value="5">Management</option>
-								<option class="level-0" value="4">Programmers</option>
-								<option class="level-0" value="3">Programs</option>
-								<option class="level-0" value="2">University</option>
-							</select>
-						</span>
-						<i class="icon-folder"></i>
-						<span class="form-description">Please choose the appropriate section so easily search for your question.</span>
-					</p>
+		{% csrf_token %}
+		<label for = "{{form.text.id_for_label}}" >Text:</label><br>
+		{{form.text}}
+		<br>
+		<label for = "{{form.explanation.id_for_label}}" >Explanation:</label><br>
+		{{form.explanation}}
+		<br>
+		<!--<label for = "{{form.interests.id_for_label}}" >Interests:</label>-->
+		{{form.interests|as_crispy_field}}
+		<br>
+		<button type ="submit" class="btn btn-primary btn-lg" >Submit</button>
 
-					<p class="wpqa_tag"><label for="question_tags-398">Tags</label>
-						<input type="text" class="input question_tags" name="question_tags" id="question_tags-398" data-seperator="," style="display: none;">
-						<ul class="taglist">
-							<li class="input">
-								<input type="text"><span style="display: none;"></span>
-							</li>
-						</ul>
-						<span class="form-description">Please choose suitable Keywords Ex : <span class="color">question, poll</span>.</span>
-					</p>
+	</form>
 
-					<p class="wpqa_checkbox_p">
-						<label for="question_poll-398">
-							<span class="wpqa_checkbox">
-								<input type="checkbox" id="question_poll-398" class="question_poll" value="on" name="question_poll">
-							</span>
-							<span class="wpqa_checkbox_span">This question is a poll? If you want to be doing a poll click here.</span>
-						</label>
-					</p>
+	
+    </div>
 
-					<div class="clearfix"></div>
-
-					<div class="poll_options" style="display: none;"><ul class="question_items question_polls_item ui-sortable"><li id="poll_li_1" class="ui-sortable-handle"><div class="poll-li"><p><input class="ask" name="ask[1][title]" type="text"><i class="icon-comment"></i></p><input name="ask[1][id]" value="1" type="hidden"><div class="del-item-li"><i class="icon-cancel"></i></div><div class="move-poll-li"><i class="icon-menu"></i></div></div></li></ul><button type="button" class="button-default-3 add_poll_button_js">Add More Answers</button><div class="clearfix"></div></div>
-
-					<div class="question-multiple-upload">
-						<label>Attachment</label>
-						<div class="clearfix"></div>
-						<ul class="question_items question_upload_item ui-sortable"></ul>
-						<button type="button" class="button-default-3 add_upload_button_js">Add Field</button>
-						<div class="clearfix"></div>
-					</div>
-
-					<div class="wpqa_textarea">
-						<label for="question-details-add-398">Details<span class="required">*</span></label>
-						<div class="the-details the-textarea">
-							<div id="wp-question-details-add-398-wrap" class="wp-core-ui wp-editor-wrap tmce-active">
-								<div id="wp-question-details-add-398-editor-tools" class="wp-editor-tools hide-if-no-js">
-									<div id="wp-question-details-add-398-media-buttons" class="wp-media-buttons">
-										<button type="button" class="button insert-media add_media" data-editor="question-details-add-398"><span class="wp-media-buttons-icon"></span> Add Media</button>
-									</div>
-
-									<div class="wp-editor-tabs">
-										<button type="button" id="question-details-add-398-tmce" class="wp-switch-editor switch-tmce" data-wp-editor-id="question-details-add-398">Visual</button>
-										<button type="button" id="question-details-add-398-html" class="wp-switch-editor switch-html" data-wp-editor-id="question-details-add-398">Text</button>
-									</div>
-								</div>
-
-								<div id="wp-question-details-add-398-editor-container" class="wp-editor-container">
-									<textarea class="wp-editor-area" rows="10" autocomplete="off" cols="40" name="comment" id="question-details-add-398" style="display: none;" aria-hidden="true"></textarea>
-								</div>
-							</div>
-						</div>
-
-						<span class="form-description">Type the description thoroughly and in details.</span>
-					</div>
-
-					<p class="wpqa_checkbox_p ask_anonymously_p"><label for="anonymously_question-398">
-						<span class="wpqa_checkbox"><input type="checkbox" id="anonymously_question-398" class="ask_anonymously" name="anonymously_question" value="on"></span>
-						<span class="wpqa_checkbox_span">Ask Anonymously</span>
-						<span class="anonymously_span ask_named" style=""><img alt="adarsh" src="temp%20add%20question_files/ad8fd5da99af8b2e058a48ad7000de82_002.jpg" srcset="https://secure.gravatar.com/avatar/ad8fd5da99af8b2e058a48ad7000de82?s=50&amp;d=mm&amp;r=g 2x" class="avatar avatar-25 photo" width="25" height="25"><span>adarsh asks</span></span>
-						<span class="anonymously_span ask_none" style="display: none;"><img alt="Anonymous" src="temp%20add%20question_files/avatar.png"><span>Anonymous asks</span></span></label>
-					</p>
-
-					<p class="wpqa_checkbox_p"><label for="video_description-398"><span class="wpqa_checkbox"><input type="checkbox" id="video_description-398" class="video_description_input" name="video_description" value="on"></span><span class="wpqa_checkbox_span">Do you need a video to description the problem better?</span></label></p>
-
-					<div class="video_description" style="display: none;"><p><label for="video_type-398">Video type</label><span class="styled-select"><select id="video_type-398" name="video_type"><option value="youtube" selected="selected">Youtube</option><option value="vimeo">Vimeo</option><option value="daily">Dialymotion</option></select></span><i class="icon-video"></i><span class="form-description">Choose from here the video type.</span></p><p><label for="video_id-398">Video ID</label><input name="video_id" id="video_id-398" class="video_id" type="text"><i class="icon-play"></i><span class="form-description">Put here the video id : https://www.youtube.com/watch?v=sdUUx5FdySs EX : 'sdUUx5FdySs'.</span></p></div>
-
-					<p class="wpqa_checkbox_p"><label for="private_question-398"><span class="wpqa_checkbox"><input type="checkbox" id="private_question-398" class="private_question" name="private_question" value="on"></span><span class="wpqa_checkbox_span">This question is a private question?</span></label></p>
-
-					<p class="wpqa_checkbox_p"><label for="remember_answer-398"><span class="wpqa_checkbox"><input type="checkbox" id="remember_answer-398" class="remember_answer" name="remember_answer" value="on"></span><span class="wpqa_checkbox_span">Get notification by email when someone answers this question.</span></label></p>
-
-					<p class="wpqa_checkbox_p"><label for="terms_active-398"><span class="wpqa_checkbox"><input type="checkbox" id="terms_active-398" name="terms_active" value="on"></span><span class="wpqa_checkbox_span">By posting your question, you agree to the <a target="_blank" href="#">terms of service</a>.</span><span class="required">*</span></label></p>
-
-				</div>
-
-				<p class="form-submit"><input type="hidden" name="form_type" value="add_question"><input type="submit" value="Publish Your Question" class="button-default"></p>
-
-			</form>
-		</div>
-
-	</div>
+	
 
 	<!-- RIGHT SIDE BAR -->
 <div class="hide-main-inner"></div>
