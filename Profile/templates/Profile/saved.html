@@ -1,71 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		Profile
-	</title>
-</head>
-
-<body style = "background-color: green">
-	<a href = "/home/dashboard/"><button type = "button">Home</button></a>
-
-	<a href="/profile/interests/"><button type ="button">Add your interests</button></a>
-	<br>
-	<br>
-	<br>
-	<h3> SAVED QUESTIONS </h3>
-	{% for q in save_q %}
-	{{q.text}}
-	<br>
-	{{q.explaination}}
-	<br>
-	{% for a in save_a %}
-	{% if a.question_id == q.id %}
-	{{a.text}}
-	<br>
-	{% endif %}
-	{% endfor %}
-	{% endfor %}
-
-	<br>
-	<br>
-	<br>
-	<h3> ASKED QUESTIONS </h3>
-	{% for q in ask_q %}
-	{{q.text}}
-	<br>
-	{{q.explaination}}
-	<br>
-	{% for a in ask_a %}
-	{% if a.question_id == q.id %}
-	{{a.text}}
-	<br>
-	{% endif %}
-	{% endfor %}
-	{% endfor %}
-
-
-	<br>
-	<br>
-	<br>
-	<h3> ANSWERED QUESTIONS </h3>
-	{% for q in answer_q %}
-	{{q.text}}
-	<br>
-	{{q.explaination}}
-	<br>
-	{% for a in answer_a %}
-	{% if a.question_id == q.id %}
-	{{a.text}}
-	<br>
-	{% endif %}
-	{% endfor %}
-	{% endfor %}
-
-</body>
-</html>-->
-
 	<!-- HEADER -->
 	{% include "home/header.html" %}
 
@@ -89,7 +21,9 @@
 		</div></div>
 
 
-		<!-- ASKED QUESTIONS -->
+		{% for question in save_q %}
+
+		<!-- SAVED QUESTIONS -->
 
 		<article class="article-question article-post">
 			<div class="single-inner-content"><div class="question-inner">
@@ -151,12 +85,18 @@
 			</div></div>
 		</article>
 
+		{% endfor %}
+
+		{% if not question_count %}
+
 		<!-- IF NO QUESTIONS -->
 		<section id="section-">
 			<div class="alert-message warning">
-				<i class="icon-flag"></i><p>Still no questions.</p>
+				<i class="icon-flag"></i><p>No questions saved.</p>
 			</div>
 		</section>
+
+		{% endif %}
 
 	</div>
 

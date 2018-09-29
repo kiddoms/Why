@@ -45,7 +45,7 @@ def answered(request):
 		question_id2.add(q.id)
 	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
 	question_count = ask_questions.count()
-	return (request , "Profile/answered.html" , {'answer_q':answer_questions ,})
+	return render(request , "Profile/answered.html" , {'answer_q':answer_questions ,})
 
 
 @login_required
@@ -62,7 +62,7 @@ def saved(request):
 		question_id2.add(q.id)
 	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
 	question_count = ask_questions.count()
-	return (request , "Profile/saved.html" ,{'save_q':save_questions ,'answer_count':answer_count , 
+	return render(request , "Profile/saved.html" ,{'save_q':save_questions ,'answer_count':answer_count , 
 					'question_count':question_count , 'user':user} )
 
 
