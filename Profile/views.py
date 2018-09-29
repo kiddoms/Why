@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import InterestForm
 from .models import Interests , Save
 from django.contrib.auth.models import User
-from home.models import Question , Answer
+from home.models import Question , Answer , up_notif_a , down_notif_a , up_notif_q , down_notif_q , answer_notif
 # Create your views here.
 
 @login_required
@@ -39,13 +39,8 @@ def answered(request):
 	for answer in answers:
 		question_id1.add(answer.question_id)
 	answer_questions = Question.objects.filter(id__in = question_id1)
-	ask_questions = Question.objects.filter(user = user)
-	question_id2 = set()
-	for q in ask_questions:
-		question_id2.add(q.id)
-	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
-	question_count = ask_questions.count()
-	return (request , "Profile/answered.html" , {'answer_q':answer_questions ,})
+	question_count = answer_questions.count()
+	return (request , "Profile/answered.html" , {'answer_q':answer_questions ,'question_count':question_count})
 
 
 @login_required
@@ -56,13 +51,8 @@ def saved(request):
 	for save in saves:
 		question_id.add(save.question_id)
 	save_questions = Question.objects.filter(id__in = question_id)
-	ask_questions = Question.objects.filter(user = user)
-	question_id2 = set()
-	for q in ask_questions:
-		question_id2.add(q.id)
-	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
-	question_count = ask_questions.count()
-	return (request , "Profile/saved.html" ,{'save_q':save_questions ,'answer_count':answer_count , 
+	question_count = save_questions.count()
+	return (request , "Profile/saved.html" ,{'save_q':save_questions , 
 					'question_count':question_count , 'user':user} )
 
 
@@ -89,5 +79,37 @@ def add_interests(request):
 	else:
 		form = InterestForm(prefix = "form")
 		return render(request , "Profile/interest.html" , {'form':form})
+
+
+@login_required
+def notif(request):
+	user = User.objects.get(username = request.user)
+	q_notif_up = up_notif_q.objects.filter(user = user)
+	for notif in q_notif_up:
+		notif.read = True
+		notif.save()
+
+	q_notif_down = down_notif_q.objects.filter(user = user)
+	for notif in q_notif_down:
+		notif.read = True
+		notif.save()
+	a_notif_up = up_notif_a.objects.filter(user = user)
+	for notif in a_notif_up:
+		notif.read = True
+		notif.save()
+
+	a_notif_down = down_notif_a.objects.filter(user = user)
+	for notif in a_notif_down:
+		notif.read = True
+		notif.save()
+	answer_notif = answer_notif.objects.filter(user = user)
+	for notif in answer_notif:
+		notif.read = True
+		notif.save()
+
+
+	return render(request , "Profile/notif.html",{'q_notif_up':q_notif_up,'q_notif_down':q_notif_down, 
+			'a_notif_down':a_notif_down , 'a_notif_up':a_notif_up , 'answer_notif':answer_notif})
+
 
 

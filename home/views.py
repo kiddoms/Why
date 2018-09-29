@@ -145,6 +145,7 @@ def ask(request):
 @login_required
 def answer(request , question_id):
 	question = Question.objects.get(id = question_id)
+	answers = Answer.objects.filter(question_id = question.id).order_by('-creation_date')
 	if request.method == "POST":
 		form = AnswerForm(request.POST , prefix = 'form')
 		if form.is_valid():
@@ -162,7 +163,7 @@ def answer(request , question_id):
 
 	else:
 		form = AnswerForm(prefix = 'form')
-		return render(request , "home/answer.html" , {'form':form  , 'question':question})
+		return render(request , "home/answer.html" , {'form':form  , 'question':question , 'answers':answers})
 
 @login_required
 def question_upvote(request , question_id):
