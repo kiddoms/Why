@@ -14,81 +14,48 @@
 
 		<div class="wrap-tabs"><div class="menu-tabs active-menu">
 			<ul class="menu flex">
-				<li class="active-tab"><a href="/profile/">Asked Questions</a></li>
+				<li><a href="/profile/">Asked Questions</a></li>
 				<li><a href="/profile/answered/">Answered Questions</a></li>
 				<li><a href="/profile/saved/">Saved Questions</a></li>
 			</ul>
 		</div></div>
 
+		<div id="section-notifications" class="user-notifications user-profile-area"><div>
+			<ul>
+				{% for q in answer_notif %}
+				<li><i class="icon-plus"></i><div>
+					<a href="#">{{q.anserer}}</a> has answered your question.
+				{% endfor %}
 
-		<!-- ASKED QUESTIONS -->
+				{% for q in q_notif_up %}
+				<li><i class="icon-up-dir"></i><div>
+					<a href="#">{{q.voter}}</a> has upvoted your question.
+				{% endfor %}
 
-		<article class="article-question article-post">
-			<div class="single-inner-content"><div class="question-inner">
-				<div class="question-image-vote"><div class="author-image">
-					<a href="#"><span class="author-image-span"><img class="avatar avatar-42 photo" alt="{{question.user.username}}" title="{{question.user.username}}" src="/static/home/dp-42_42.jpg" width="42" height="42"></span></a>
-					</div>
-				</div>
+				{% for q in a_notif_up %}
+				<li><i class="icon-up-dir"></i><div>
+					<a href="#">{{q.voter}}</a> has upvoted your answer.
+				{% endfor %}
 
-				<div class="question-content question-content-first">
-					<header class="article-header">
-						<div class="question-header">
-							<a class="post-author" href="#">{{question.user.username}}</a>
-							<div class="post-meta">
-								<span class="post-date" itemprop="dateCreated" datetime="April 19, 2018">Asked: <time class="entry-date published" datetime="2018-04-19T02:00:31+00:00">April 19, 2018</time></span>
-							</div>
-						</div>
-					</header>
+				{% for q in q_notif_down %}
+				<li><i class="icon-down-dir"></i><div>
+					<a href="#">{{q.voter}}</a> has downvoted your question.
+				{% endfor %}
 
-					<div>
-						<h2 class="post-title"><a class="post-title" href="/home/{{question.id}}/answer/">{{question.text}}</a></h2>
-					</div>
-				</div>
+				{% for q in a_notif_down %}
+				<li><i class="icon-down-dir"></i><div>
+					<a href="#">{{q.voter}}</a> has downvoted your answer.
+				{% endfor %}
+				</div></li>
+			</ul>
+		</div></div>
 
-				<div class="question-image-vote question-vote-sticky">
-					<div>
-						<ul class="question-vote">
-							<li class="question-vote-up"><a href="/home/question/{{question.id}}/upvote/" title="Like"><i class="icon-up-dir"></i></a></li>
-							<li class="vote_result">{{question.upvote}}</li>
-							<li class="li_loader"><span class="loader_3 fa-spin"></span></li>
-							<li class="question-vote-down"><a href="/home/question/{{question.id}}/downvote/" title="Dislike"><i class="icon-down-dir"></i></a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="question-content question-content-second">
-					<div class="post-wrap-content">
-						<div class="question-content-text">
-							<p>{{ question.explaination }}</p>
-						</div>
-
-						<div class="tagcloud"><div class="question-tags"><i class="icon-tags"></i>
-							{% for tag in question.interests.split %}
-								<a href="#">{{ tag }}</a>
-							{%endfor%}
-						</div></div>
-					</div>
-					
-					<footer class="question-footer">
-						<ul class="footer-meta">
-							<li>
-								<a href="/home/{{question.id}}/answer/">{{question.answer_count}}</a> 
-								<span class="question-span"><a href="/home/{{question.id}}/answer/">Answers</a></span>
-							</li>
-						</ul>
-						<a class="meta-answer" href="/home/{{question.id}}/answer/">Answer</a>
-					</footer>
-				</div>
-				<div class="clearfix"></div>
-			</div></div>
-		</article>
-
-		<!-- IF NO QUESTIONS -->
+		<!-- IF NO QUESTIONS 
 		<section id="section-">
 			<div class="alert-message warning">
-				<i class="icon-flag"></i><p>Still no questions.</p>
+				<i class="icon-flag"></i><p>No notifications</p>
 			</div>
-		</section>
+		</section>-->
 
 	</div>
 

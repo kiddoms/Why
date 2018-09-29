@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-	path('notif/', views.notif , name = "notif"),
+	path('notifications/', views.notif , name = "notif"),
 	path('saved/' , views.saved , name = "saved"),
 	path('answered/' , views.answered, name ="answered"),
 	path('interests/', views.add_interests , name = "add_interests"),

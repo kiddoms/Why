@@ -1,17 +1,12 @@
 <div class="breadcrumbs">
-	<span class="crumbs" xmlns:v="https://rdf.data-vocabulary.org/#">
-		<span typeof="v:Breadcrumb"> 
-			<a rel="v:url" property="v:title" href="https://2code.info/demo/themes/Discy/Main/"><i class="icon-home"></i>Home</a>
-			<span rel="v:child" typeof="v:Breadcrumb"><span class="crumbs-span"> / </span>
-				<span class="current">adarsh</span>
+	<span>
+		<span> 
+			<a href="/home/">Home</a>
+			<span><span class="crumbs-span"> / </span>
+				<span>{{request.user}}</span>
 			</span>
 		</span>
 	</span>
-	<div class="breadcrumb-right">
-		<div class="question-navigation edit-profile">
-			<a href="#"><i class="icon-pencil"></i>Edit profile</a>
-		</div>
-	</div>
 </div>
 
 <div class="clearfix"></div>
@@ -36,8 +31,8 @@
 	</div></div>
 	<div class="user-stats">
 		<ul class="row">
-			<li class="col col3 user-questions"><div><a href="#"></a><div><span>0</span><h4>Questions</h4></div></div></li>
-			<li class="col col3 user-answers"><div><a href="#"></a><div><span>0</span><h4>Answers</h4></div></div></li>
+			<li class="col col3 user-questions"><div><a href="/profile/"></a><div><span>{{ question_count }}</span><h4>Questions</h4></div></div></li>
+			<li class="col col3 user-answers"><div><a href="/profile/answered/"></a><div><span>{{ answer_count }}</span><h4>Answers</h4></div></div></li>
 		</ul>
 	</div>
 	<div class="user-follower">

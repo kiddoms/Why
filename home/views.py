@@ -125,10 +125,10 @@ def logout_user(request):
 
 @login_required
 def ask(request):
+	user = User.objects.get(username = request.user)
 	if request.method == 'POST':
 		form = QuestionForm(request.POST , prefix = "form")
 		if form.is_valid():
-			user = User.objects.get(username = request.user)
 			print(type(form.cleaned_data['interests']))
 
 			x = re.sub("[\[\]',]","",str(form.cleaned_data['interests']))
@@ -139,8 +139,13 @@ def ask(request):
 			return HttpResponseRedirect('/home/dashboard/')
 		
 	else:
+		a = answer_notif.objects.filter(user = user).filter(read = False).count()
+		b = up_notif_q.objects.filter(user = user).filter(read = False).count()
+		c = down_notif_q.objects.filter(user = user).filter(read = False).count()
+		d = up_notif_a.objects.filter(user = user).filter(read = False).count()
+		e = down_notif_a.objects.filter(user = user).filter(read = False).count()
 		form = QuestionForm(prefix = 'form')
-		return render(request , 'home/ask.html' , {'form':form})
+		return render(request , 'home/ask.html' , {'form':form,'unread':(a+b+c+d+e)})
 
 @login_required
 def answer(request , question_id):
@@ -163,7 +168,12 @@ def answer(request , question_id):
 
 	else:
 		form = AnswerForm(prefix = 'form')
-		return render(request , "home/answer.html" , {'form':form  , 'question':question , 'answers':answers})
+		a = answer_notif.objects.filter(user = user).filter(read = False).count()
+		b = up_notif_q.objects.filter(user = user).filter(read = False).count()
+		c = down_notif_q.objects.filter(user = user).filter(read = False).count()
+		d = up_notif_a.objects.filter(user = user).filter(read = False).count()
+		e = down_notif_a.objects.filter(user = user).filter(read = False).count()
+		return render(request , "home/answer.html" , {'form':form  , 'question':question , 'answers':answers,'unread':(a+b+c+d+e)})
 
 @login_required
 def question_upvote(request , question_id):
