@@ -54,3 +54,35 @@ class Comment(models.Model):
 	answer = models.ForeignKey(Answer, on_delete = models.CASCADE)
 	user = models.ForeignKey(User , on_delete = models.CASCADE)
 	comment = models.CharField(max_length = 50)
+
+
+
+class up_notif_q(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	voter = models.CharField(max_length = 50)
+	question = models.ForeignKey(Question , on_delete = models.CASCADE)
+	read = models.BooleanField(default = False)
+
+class down_notif_q(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	voter = models.CharField(max_length = 50)
+	question = models.ForeignKey(Question , on_delete = models.CASCADE)
+	read = models.BooleanField(default = False)
+
+class up_notif_a(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	voter = models.CharField(max_length = 50)
+	answer = models.ForeignKey(Answer , on_delete = models.CASCADE)
+	read = models.BooleanField(default = False)
+
+class down_notif_a(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	voter = models.CharField(max_length = 50)
+	answer = models.ForeignKey(Answer , on_delete = models.CASCADE)
+	read = models.BooleanField(default = False)
+
+class answer_notif(models.Model):
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
+	question = models.ForeignKey(Question , on_delete = models.CASCADE)
+	answerer = models.CharField(max_length = 50)
+	read = models.BooleanField(default = False)

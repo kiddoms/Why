@@ -10,19 +10,15 @@ from home.models import Question , Answer
 @login_required
 def index(request):
 	user = User.objects.get(username = request.user)
-	saves = Save.objects.filter(user = user)
-	question_id = set()
-	for save in saves:
-		question_id.add(save.question_id)
-	save_questions = Question.objects.filter(id__in = question_id)
-	save_answers = Answer.objects.filter(question_id__in = question_id)
+	
 
 
 	ask_questions = Question.objects.filter(user = user)
 	question_id2 = set()
 	for q in ask_questions:
 		question_id2.add(q.id)
-	ask_answers = Answer.objects.filter(question_id__in = question_id2)
+	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
+	question_count = ask_questions.count()
 
 	answers = Answer.objects.filter(user = user)
 	question_id1 = set()
@@ -31,10 +27,47 @@ def index(request):
 	answer_questions = Question.objects.filter(id__in = question_id1)
 	
 
-	return render(request , 'Profile/profile.html',{'save_q':save_questions ,
-							'ask_q':ask_questions , 'answer_q':answer_questions ,
-							'answer_a':answers , 'save_a':save_answers,
-							'ask_a':ask_answers})
+	return render(request , 'Profile/profile.html',{
+							'ask_q':ask_questions , 
+							'answer_count':answer_count , 'question_count':question_count , 'user':user})
+
+@login_required
+def answered(request):
+	user = User.objects.get(username = request.user)
+	answers = Answer.objects.filter(user = user)
+	question_id1 = set()
+	for answer in answers:
+		question_id1.add(answer.question_id)
+	answer_questions = Question.objects.filter(id__in = question_id1)
+	ask_questions = Question.objects.filter(user = user)
+	question_id2 = set()
+	for q in ask_questions:
+		question_id2.add(q.id)
+	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
+	question_count = ask_questions.count()
+	return (request , "Profile/answered.html" , {'answer_q':answer_questions ,})
+
+
+@login_required
+def saved(request):
+	user = User.objects.get(username = request.user)
+	saves = Save.objects.filter(user = user)
+	question_id = set()
+	for save in saves:
+		question_id.add(save.question_id)
+	save_questions = Question.objects.filter(id__in = question_id)
+	ask_questions = Question.objects.filter(user = user)
+	question_id2 = set()
+	for q in ask_questions:
+		question_id2.add(q.id)
+	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
+	question_count = ask_questions.count()
+	return (request , "Profile/saved.html" ,{'save_q':save_questions ,'answer_count':answer_count , 
+					'question_count':question_count , 'user':user} )
+
+
+
+
 
 @login_required
 def add_interests(request):

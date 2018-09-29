@@ -5,7 +5,7 @@ from .forms import LoginForm , RegisterForm  , QuestionForm , AnswerForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
 from django.shortcuts import render
-from .models import Question , Answer , Vote_q , Vote_a
+from .models import Question , Answer , Vote_q , Vote_a , up_notif_q , down_notif_q , up_notif_a , down_notif_a , answer_notif
 from Profile.models import Save , Interests
 import re
 
@@ -109,7 +109,13 @@ def dashboard(request ):
 				count += 1
 		answer.downvote = count
 		answer.save()
-	return render(request , "home/dashboard.html" , {'user':user , 'questions':questions ,'answers':answers})
+
+	a = answer_notif.objects.filter(user = user).filter(read = False).count()
+	b = up_notif_q.objects.filter(user = user).filter(read = False).count()
+	c = down_notif_q.objects.filter(user = user).filter(read = False).count()
+	d = up_notif_a.objects.filter(user = user).filter(read = False).count()
+	e = down_notif_a.objects.filter(user = user).filter(read = False).count()
+	return render(request , "home/dashboard.html" , {'user':user , 'questions':questions ,'answers':answers ,'unread':(a+b+c+d+e)})
 
 
 @login_required
@@ -148,6 +154,8 @@ def answer(request , question_id):
 				answer.save()
 			except:
 				return HttpResponse("you cannot answer twice")
+			notif = answer_notif (user = question.user , answerer = request.user , qustion = question)
+			notif.save()
 			question.answer_count += 1
 			question.save()
 			return redirect("dashboard")
@@ -169,6 +177,8 @@ def question_upvote(request , question_id):
 	else:
 		up.upvote = True
 		up.downvote = False
+		notif = up_notif_q(user = question.user , voter = request.user , question = question)
+		notif.save()
 	up.save()
 	return HttpResponseRedirect("/home/dashboard/")
 
@@ -185,6 +195,8 @@ def question_downvote(request , question_id):
 	else:
 		down.upvote = False	
 		down.downvote = True
+		notif = down_notif_q(user = question.user , voter = request.user , question = question)
+		notif.save()
 	
 	down.save()
 	return HttpResponseRedirect("/home/dashboard/")
@@ -203,6 +215,8 @@ def answer_upvote(request , answer_id):
 	else:
 		up.upvote = True
 		up.downvote = False
+		notif = up_notif_a(user = answer.user , voter = request.user , answer = answer)
+		notif.save()
 	up.save()
 	return HttpResponseRedirect("/home/dashboard/")
 
@@ -219,6 +233,8 @@ def answer_downvote(request , answer_id):
 	else:
 		down.upvote = False	
 		down.downvote = True
+		notif = down_notif_a(user = answer.user , voter = request.user , answer = answer)
+		notif.save()
 	
 	down.save()
 	return HttpResponseRedirect("/home/dashboard/")
