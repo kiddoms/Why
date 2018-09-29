@@ -1,31 +1,10 @@
-<!--
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>
-		Answer
-	</title>
-</head>
-
-<body style = "background-color: powderblue">
-	{{question.text}}
-
-	<form method = "POST">
-		{% csrf_token %}
-
-		{{form.as_p}}
-
-		<button type = "submit">Submit </button>
-	</form>
-</body>
-</html>-->
-
-
-	<!-- HEADER -->
 	{% include "home/header.html" %}
 
-
+<style>
+textarea{
+	width: 80px;
+}
+</style>
 	</div>
 
 
@@ -207,21 +186,10 @@
 	<form action="#" method="post" id="commentform" class="post-section comment-form answers-form" novalidate="" enctype="multipart/form-data">
 		<p class="comment-login">Logged in as<a class="comment-login-login" href="#">{{request.user}}</a><a class="comment-login-logout" href="/home/logout" title="Logout of this account">Logout</a></p>
 
-		<div class="wpqa_form"> 
-			<div class="fileinputs"> 
-				<input type="file" name="attachment" id="attachment"> 
-				<div class="fakefile"> 
-					<button type="button">Select file</button> <span>Browse</span> 
-				</div> 
+		{% csrf_token %}
 
-				<i class="icon-camera"></i> 
-			</div> 
-		</div>
-
-		<div class="form-input form-textarea form-comment-normal">
-			<textarea id="comment" name="comment" aria-required="true" placeholder="Answer"></textarea>
-			<i class="icon-pencil"></i>
-		</div>
+		{{form.as_p}}
+		
 
 		<p class="form-submit"><input name="submit" type="submit" id="submit" class="button-default" value="Submit"> 
 			<input type="hidden" name="comment_post_ID" value="118" id="comment_post_ID">

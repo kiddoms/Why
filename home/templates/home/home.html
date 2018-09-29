@@ -4,18 +4,45 @@
 	<title>
 		Home
 	</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<style>
+.container{
+	border: 5px solid blue;
+	margin: auto;
+	padding: 20px;
+	border-radius: 10%;
+	width: 25%;
+	margin-top: 10%;
+
+}
+
+.form-control {
+	width: 90%;
+}
+
+form{
+	margin: auto;
+}
+
+button{
+	margin-left: auto;
+}
+
+</style>
 </head>
 <body style = "background-color: powderblue">
-
-<form method="Post" >
+<div class="container">
+<form method="Post" class="form-group">
 	{% csrf_token %}
 
 	{{form.as_p}}
-	<button type = "submit">Login</button>
+	<button type = "submit" class="btn btn-primary">Login</button>
 	
+
+<a href = "/home/register/"><button type = "button" class="btn btn-primary">Register</button></a>
 </form>
-
-<a href = "/home/register/"><button type = "button" >Register</button></a>
-
+</div>
 </body>
 </html>

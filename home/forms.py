@@ -12,6 +12,13 @@ class RegisterForm(ModelForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email' , 'first_name' , 'last_name' , 'password']
+		widgets = {
+			'username': forms.TextInput(attrs={'class': 'form-control'}),
+			'email': forms.TextInput(attrs={'class': 'form-control'}),
+			'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+			'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+			'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+		}
 
 
 class QuestionForm(forms.Form):
@@ -25,5 +32,5 @@ class QuestionForm(forms.Form):
 		, choices = topic_choices)
 
 class AnswerForm(forms.Form):
-	text = forms.CharField(max_length = 300 , widget = forms.TextInput(attrs = {'class':'form-control'}) )
+	text = forms.CharField(label = "Answer" , max_length = 300 , widget = forms.Textarea(attrs = {'class':'form-control'}) )
 	
