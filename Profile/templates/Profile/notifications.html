@@ -23,8 +23,6 @@
 
 		<!-- ASKED QUESTIONS -->
 
-		{% for question in ask_q %}
-
 		<article class="article-question article-post">
 			<div class="single-inner-content"><div class="question-inner">
 				<div class="question-image-vote"><div class="author-image">
@@ -85,18 +83,12 @@
 			</div></div>
 		</article>
 
-		{% endfor %}
-
-		{% if not question_count %}
-
 		<!-- IF NO QUESTIONS -->
 		<section id="section-">
 			<div class="alert-message warning">
 				<i class="icon-flag"></i><p>Still no questions.</p>
 			</div>
 		</section>
-
-		{% endif %}
 
 	</div>
 

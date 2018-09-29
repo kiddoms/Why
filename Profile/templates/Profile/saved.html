@@ -14,16 +14,16 @@
 
 		<div class="wrap-tabs"><div class="menu-tabs active-menu">
 			<ul class="menu flex">
-				<li class="active-tab"><a href="/profile/">Asked Questions</a></li>
+				<li><a href="/profile/">Asked Questions</a></li>
 				<li><a href="/profile/answered/">Answered Questions</a></li>
-				<li><a href="/profile/saved/">Saved Questions</a></li>
+				<li class="active-tab"><a href="/profile/saved/">Saved Questions</a></li>
 			</ul>
 		</div></div>
 
 
-		<!-- ASKED QUESTIONS -->
+		{% for question in save_q %}
 
-		{% for question in ask_q %}
+		<!-- SAVED QUESTIONS -->
 
 		<article class="article-question article-post">
 			<div class="single-inner-content"><div class="question-inner">
@@ -92,7 +92,7 @@
 		<!-- IF NO QUESTIONS -->
 		<section id="section-">
 			<div class="alert-message warning">
-				<i class="icon-flag"></i><p>Still no questions.</p>
+				<i class="icon-flag"></i><p>No questions saved.</p>
 			</div>
 		</section>
 
