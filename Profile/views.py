@@ -120,9 +120,15 @@ def notif(request):
 		notif.read = True
 		notif.save()
 
+	ask_questions = Question.objects.filter(user = user).order_by('-creation_date')
+	question_id2 = set()
+	for q in ask_questions:
+		question_id2.add(q.id)
+	answer_count= Answer.objects.filter(question_id__in = question_id2).count()
+	question_count = ask_questions.count()
 
 	return render(request , "Profile/notifications.html",{'q_notif_up':q_notif_up,'q_notif_down':q_notif_down, 
-			'a_notif_down':a_notif_down , 'a_notif_up':a_notif_up , 'answer_notif':answer_notifs})
+			'a_notif_down':a_notif_down , 'a_notif_up':a_notif_up , 'answer_notif':answer_notifs , 'answer_count':answer_count , 'question_count':question_count })
 
 
 
