@@ -150,11 +150,11 @@ def ask(request):
 @login_required
 def answer(request , question_id):
 	question = Question.objects.get(id = question_id)
+	user = User.objects.get(username = request.user)
 	answers = Answer.objects.filter(question_id = question.id).order_by('-creation_date')
 	if request.method == "POST":
 		form = AnswerForm(request.POST , prefix = 'form')
 		if form.is_valid():
-			user = User.objects.get(username = request.user)
 			answer = Answer(user = user , text = form.cleaned_data['text']  , question = question)
 			try:
 				answer.save()

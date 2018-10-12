@@ -65,6 +65,8 @@ textarea{
 					<ul class="question-vote">
 						<li class="question-vote-up"><a href="/home/question/{{question.id}}/upvote/" title="Like"><i class="icon-up-dir"></i></a></li>
 						<li class="vote_result">{{question.upvote}}</li>
+						<li class="vote_result">--</li>
+						<li class="vote_result">{{question.downvote}}</li>
 						<li class="li_loader"><span class="loader_3 fa-spin"></span></li>
 						<li class="question-vote-down"><a href="/home/question/{{question.id}}/downvote/" title="Dislike"><i class="icon-down-dir"></i></a></li>
 					</ul>
@@ -88,14 +90,14 @@ textarea{
 					<ul class="footer-meta">
 						<li><a href="/home/{{question.id}}/answer/">{{question.answer_count}}</a> <span class="question-span"><a href="/home/{{question.id}}/answer/">Answers</a></span></li>
 						<!--<li class="question-followers"><i class="icon-users"></i><span>5</span> Followers</li>-->
-						<li class="question-follow"><div class="small_loader loader_2"></div><a href="#" title="Save the question">Save</a></li>
+						<li class="question-follow"><div class="small_loader loader_2"></div><a href="/home/question/{{question.id}}/save/" title="Save the question">Save</a></li>
 					</ul>
 				</footer>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 
-		<!-- IF THE QUESTION IS POSTED BY THE SAME USER, THEN SHOW EDIT, DELETE OPTIONS-->
+		<!-- IF THE QUESTION IS POSTED BY THE SAME USER, THEN SHOW EDIT, DELETE OPTIONS
 		<div class="question-bottom">
 			<ul class="question-link-list">
 				<li>
@@ -108,7 +110,7 @@ textarea{
 					<a class="question-close" href="#" title="Close the question">Close</a>
 				</li>
 			</ul>
-		</div>
+		</div>-->
 
 		</div>
 
@@ -117,7 +119,10 @@ textarea{
 
 <div class="question-adv-comments">
 	<div id="comments" class="post-section">
-		<div class="post-inner"><div class="answers-tabs">
+		<div class="post-inner">
+
+			<!--
+			<div class="answers-tabs">
 			<h3 class="section-title"><span>{{question.answer_count}} </span>Answers</h3>
 			<div class="answers-tabs-inner">
 				<ul>
@@ -125,7 +130,7 @@ textarea{
 					<li><a href="#">Oldest</a></li>
 					<li><a href="#">Recent</a></li>
 				</ul>
-			</div>
+			</div>-->
 
 			<div class="clearfix"></div></div>
 
@@ -159,7 +164,9 @@ textarea{
 
 				<ul class="question-vote answer-vote answer-vote-dislike"> 
 					<li><a href="/home/answer/{{answer.id}}/upvote/" id="comment_vote_up-63" title="Like"><i class="icon-up-dir"></i></a></li> 
-					<li class="vote_result">{{answer.upvote}}</li> 
+					<li class="vote_result">{{answer.upvote}}</li>
+					<li class="vote_result">--</li>
+					<li class="vote_result">{{answer.downvote}}</li> 
 					<li class="li_loader"><span class="loader_3 fa-spin"></span></li> 
 					<li class="dislike_answers"><a href="/home/answer/{{answer.id}}/downvote/" title="Dislike"><i class="icon-down-dir"></i></a></li> 
 				</ul> 

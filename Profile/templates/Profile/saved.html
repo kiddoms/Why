@@ -52,6 +52,8 @@
 						<ul class="question-vote">
 							<li class="question-vote-up"><a href="/home/question/{{question.id}}/upvote/" title="Like"><i class="icon-up-dir"></i></a></li>
 							<li class="vote_result">{{question.upvote}}</li>
+							<li class="vote_result">--</li>
+							<li class="vote_result">{{question.downvote}}</li>
 							<li class="li_loader"><span class="loader_3 fa-spin"></span></li>
 							<li class="question-vote-down"><a href="/home/question/{{question.id}}/downvote/" title="Dislike"><i class="icon-down-dir"></i></a></li>
 						</ul>
@@ -88,7 +90,7 @@
 		{% endfor %}
 
 		{% if not saved_question_count %}
-
+	
 		<!-- IF NO QUESTIONS -->
 		<section id="section-">
 			<div class="alert-message warning">
