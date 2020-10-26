@@ -261,7 +261,7 @@ def save(request , question_id):
 	except:
 		save = Save(question = question , user = user)
 		c=2
-	print(c)
+	
 	if c == 1:
 		save.delete()
 	elif c==2:
